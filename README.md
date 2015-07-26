@@ -1,2 +1,2 @@
 # hoctap
-Project to learn hơ to do using v-shape model
+Project to learn how to do using v-shape model create follow process
