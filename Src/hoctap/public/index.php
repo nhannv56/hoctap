@@ -1,5 +1,7 @@
 <?php
 
+use Phalcon\Mvc\Application;
+
 error_reporting(E_ALL);
 
 define('APP_PATH', realpath('..'));
@@ -9,25 +11,31 @@ try {
     /**
      * Read the configuration
      */
-    $config = include APP_PATH . "/app/config/config.php";
+    $config = new Ini(APP_PATH  . "/apps/frontend/config/config.ini");
 
     /**
-     * Read auto-loader
+     * Include services
      */
-    include APP_PATH . "/app/config/loader.php";
-
-    /**
-     * Read services
-     */
-    include APP_PATH . "/app/config/services.php";
+    require __DIR__ . '/../config/services.php';
 
     /**
      * Handle the request
      */
-    $application = new \Phalcon\Mvc\Application($di);
+    $application = new Application($di);
+
+    /**
+     * Include modules
+     */
+    require __DIR__ . '/../config/modules.php';
+
+    /**
+     * Include routes
+     */
+    require __DIR__ . '/../config/routes.php';
 
     echo $application->handle()->getContent();
 
-} catch (\Exception $e) {
+} catch (Exception $e) {
     echo $e->getMessage();
 }
+

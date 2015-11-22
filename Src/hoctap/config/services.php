@@ -5,20 +5,33 @@
  * @var \Phalcon\Config $config
  */
 
-use Phalcon\Di\FactoryDefault;
-use Phalcon\Mvc\View;
+use Phalcon\Mvc\Router;
 use Phalcon\Mvc\Url as UrlResolver;
-use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
-use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
+use Phalcon\Di\FactoryDefault;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
+use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
+use Phalcon\Mvc\View;
+use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 
 /**
- * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
+ * The FactoryDefault Dependency Injector automatically registers the right services to provide a full stack framework
  */
 $di = new FactoryDefault();
 
 /**
- * The URL component is used to generate all kind of urls in the application
+ * Registering a router
+ */
+$di->setShared('router', function () {
+    $router = new Router();
+
+    $router->setDefaultModule('frontend');
+    $router->setDefaultNamespace('hoctap\Frontend\Controllers');
+
+    return $router;
+});
+
+/**
+ * The URL component is used to generate all kinds of URLs in the application
  */
 $di->setShared('url', function () use ($config) {
     $url = new UrlResolver();
@@ -75,11 +88,20 @@ $di->setShared('modelsMetadata', function () {
 });
 
 /**
- * Start the session the first time some component request the session service
+ * Starts the session the first time some component requests the session service
  */
 $di->setShared('session', function () {
     $session = new SessionAdapter();
     $session->start();
 
     return $session;
+});
+
+/**
+* Set the default namespace for dispatcher
+*/
+$di->setShared('dispatcher', function() use ($di) {
+    $dispatcher = new Phalcon\Mvc\Dispatcher();
+    $dispatcher->setDefaultNamespace('hoctap\Frontend\Controllers');
+    return $dispatcher;
 });
