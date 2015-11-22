@@ -24,8 +24,8 @@ $di = new FactoryDefault();
 $di->setShared('router', function () {
     $router = new Router();
 
-    $router->setDefaultModule('frontend');
-    $router->setDefaultNamespace('hoctap\Frontend\Controllers');
+    $router->setDefaultModule('anonymous');
+    $router->setDefaultNamespace('hoctap\Anonymous\Controllers');
 
     return $router;
 });
@@ -102,6 +102,6 @@ $di->setShared('session', function () {
 */
 $di->setShared('dispatcher', function() use ($di) {
     $dispatcher = new Phalcon\Mvc\Dispatcher();
-    $dispatcher->setDefaultNamespace('hoctap\Frontend\Controllers');
+    $dispatcher->setDefaultNamespace('hoctap\Anonymous\Controllers');
     return $dispatcher;
 });
