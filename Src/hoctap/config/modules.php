@@ -19,5 +19,9 @@ $application->registerModules ( array (
 		'student' => array (
 				'className' => 'hoctap\Student\Module',
 				'path' => __DIR__ . '/../apps/student/Module.php' 
+		),
+		'admin' => array (
+				'className' => 'hoctap\Admin\Module',
+				'path' => __DIR__ . '/../apps/admin/Module.php' 
 		) 
 ) );
