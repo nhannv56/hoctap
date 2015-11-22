@@ -1,7 +1,7 @@
 <?php
 
 use Phalcon\Mvc\Application;
-
+use Phalcon\Config\Adapter\Ini;
 error_reporting(E_ALL);
 
 define('APP_PATH', realpath('..'));
