@@ -1,7 +1,7 @@
 <?php
 namespace hoctap\Teacher\Controllers;
 use Phalcon\Mvc\Controller;
-const WEB_TITLE = "Diễn đàn học tập|Giáo viên| ";
+const WEB_TITLE = "Diễn đàn học tập| Giáo viên| ";
 /**
  *
  * @author nhannv-pc
