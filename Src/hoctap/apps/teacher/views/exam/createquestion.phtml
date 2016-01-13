@@ -1,0 +1,35 @@
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [["`","`"],["\\(","\\)"]]
+    },
+  });
+</script>
+<script type="text/javascript"
+	src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full">
+</script>
+<script type="text/javascript">
+	function updateFormula(value){
+		var div = document.getElementById('MathOutput');
+		div.innerHTML = value;
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub,"MathOutput"]);
+}
+</script>
+<p><?php $this->flash->output()?></p>
+<body>
+	<h1>Tạo một bài toán</h1>
+	Type some TeX code:
+	<form method="get" action="">
+		<div>
+			<textarea id="MathInput" rows="5" cols="50"
+				onkeyup="updateFormula(this.value)" name="question"></textarea>
+		</div>
+		<div>
+			<input type="submit" value="add" name="add" />
+		</div>
+	</form>
+	<div id="MathOutput">You typed:</div>
+	<div>
+		<p>Question content:<?php if($this->view->data!=null)echo $this->view->data;?></p>
+	</div>
+</body>
